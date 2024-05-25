@@ -86,7 +86,7 @@ def ReadficheNom():
     data = cursor.fetchall()
     conn.close()
     # Rendre le template HTML et transmettre les données
-    return render_template('read_data.html', data=data)
+    return render_template('read_nom.html', data=data)
                                                                                                                                        
 if __name__ == "__main__":
   app.run(debug=True)
