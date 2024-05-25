@@ -79,13 +79,14 @@ def enregistrer_client():
 
 @app.route('/fiche_nom/', methods=['GET', 'POST'])
 def ReadficheNom():
-    nom = request.form['name']
-    conn = sqlite3.connect('database.db')
-    cursor = conn.cursor()
-    cursor.execute('SELECT * FROM clients WHERE nom = ?', (nom,))
-    data = cursor.fetchall()
-    conn.close()
-    # Rendre le template HTML et transmettre les données
+    data = None
+    if request.method == 'POST':
+        nom = request.form['name']
+        conn = sqlite3.connect('database.db')
+        cursor = conn.cursor()
+        cursor.execute('SELECT * FROM clients WHERE nom = ?', (nom,))
+        data = cursor.fetchall()
+        conn.close()
     return render_template('read_nom.html', data=data)
                                                                                                                                        
 if __name__ == "__main__":
