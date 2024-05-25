@@ -1,6 +1,6 @@
-<div>
-{% if data %}
-  <h2>Résultats de la recherche :</h2>
+<div class="result">
+            {% if data %}
+                <h2>Résultats de la recherche :</h2>
                 <ul>
                     {% for row in data %}
                         <li>{{ row[1] }}</li> <!-- Assurez-vous que row[1] correspond bien au nom dans votre base de données -->
@@ -8,5 +8,5 @@
                 </ul>
             {% else %}
                 <p>Aucun résultat trouvé.</p>
-{% endif %}
- </div>
+            {% endif %}
+        </div>
