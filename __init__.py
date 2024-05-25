@@ -23,7 +23,7 @@ def lecture():
         return redirect(url_for('authentification'))
 
   # Si l'utilisateur est authentifié
-    return "<h2>Bravo, vous êtes authentifié</h2>"
+    return render_template('recherche.html')
 
 @app.route('/authentification', methods=['GET', 'POST'])
 def authentification():
@@ -76,6 +76,17 @@ def enregistrer_client():
     conn.commit()
     conn.close()
     return redirect('/consultation/')  # Rediriger vers la page d'accueil après l'enregistrement
+
+@app.route('/fiche_nom/')
+def ReadficheNom():
+    nom = request.form['name']
+    conn = sqlite3.connect('database.db')
+    cursor = conn.cursor()
+    cursor.execute('SELECT * FROM clients WHERE nom = ?', (nom,))
+    data = cursor.fetchall()
+    conn.close()
+    # Rendre le template HTML et transmettre les données
+    return render_template('read_data.html', data=data)
                                                                                                                                        
 if __name__ == "__main__":
   app.run(debug=True)
