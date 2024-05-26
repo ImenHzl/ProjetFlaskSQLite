@@ -77,15 +77,14 @@ def enregistrer_client():
     conn.close()
     return redirect('/consultation/')  # Rediriger vers la page d'accueil après l'enregistrement
 
-@app.route('/fiche_nom/', methods=['GET', 'POST'])
+@app.route('/fiche_nom/', methods=['GET'])
 def ReadficheNom():
-    data = None
-    if request.method == 'POST':
-        nom = request.form['name']
+   
+        nom=request.args.get('name')
         conn = sqlite3.connect('database.db')
         cursor = conn.cursor()
         cursor.execute('SELECT * FROM clients WHERE nom = ?', (nom,))
-        data = cursor.fetchall()
+        data = cursor.fetchone()
         conn.close()
     return render_template('read_nom.html', data=data)
                                                                                                                                        
