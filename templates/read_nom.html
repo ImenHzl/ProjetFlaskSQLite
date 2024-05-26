@@ -8,14 +8,18 @@
             <th>Adresse</th>
             <th>Date de création</th>
         </tr>
-        {% for client in data %}
-        <tr>
-            <td>{{ client[0] }}</td>
-            <td>{{ client[1] }}</td>
-            <td>{{ client[2] }}</td>
-            <td>{{ client[3] }}</td>
-            <td>{{ client[4] }}</td>
-        </tr>
-        {% endfor %}
+        {% if error_message %}
+                <p class="error">{{ error_message }}</p>
+        {% elif data %}
+            {% for client in data %}
+            <tr>
+                <td>{{ client[0] }}</td>
+                <td>{{ client[1] }}</td>
+                <td>{{ client[2] }}</td>
+                <td>{{ client[3] }}</td>
+                <td>{{ client[4] }}</td>
+            </tr>
+            {% endfor %}
+         {% endif %}
     </table>
 </body>
