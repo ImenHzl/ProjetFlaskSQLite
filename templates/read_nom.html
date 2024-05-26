@@ -1,15 +1,21 @@
-   <div class="container">
-        <h1>Affiche Nom</h1>
-      
-        <div class="result">
-            {% if data %}
-                <h2>Résultats de la recherche :</h2>
-                <ul>
-                    {% for row in data %}
-                        <li>{{ data['nom']}}</li> <!-- Assurez-vous que row[1] correspond bien au nom dans votre base de données -->
-                    {% endfor %}
-                </ul>
-            {% else %}
-                <p>Aucun résultat trouvé.</p>
-            {% endif %}
-        </div>
+<body>
+    <h2>Résultats de la recherche</h2>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Adresse</th>
+            <th>Date de création</th>
+        </tr>
+        {% for client in data %}
+        <tr>
+            <td>{{ client[0] }}</td>
+            <td>{{ client[1] }}</td>
+            <td>{{ client[2] }}</td>
+            <td>{{ client[3] }}</td>
+            <td>{{ client[4] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
