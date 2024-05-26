@@ -51,7 +51,7 @@ def authentificationUser():
         if request.form['username'] == 'user' and request.form['password'] == '12345': # password à cacher par la suite
             session['authentifieUser'] = True
             # Rediriger vers la route lecture après une authentification réussie
-            return redirect(url_for('lecture'))
+            return redirect(url_for('recherche_nom'))
         else:
             # Afficher un message d'erreur si les identifiants sont incorrects
             return render_template('formulaire_authentificationUser.html', error=True)
@@ -98,20 +98,23 @@ def enregistrer_client():
 
 @app.route('/fiche_nom/', methods=['GET', 'POST'])
 def recherche_nom():
-    if request.method == 'POST' and est_authentifie_user():
+    error_message = None
+    data = None
+    if not est_authentifie_user():
+        # Rediriger vers la page d'authentification utilisateur si l'utilisateur n'est pas authentifié
+        return redirect(url_for('authentificationUser'))
+    
+    if request.method == 'POST':
         nom = request.form['nom']
         conn = sqlite3.connect('database.db')
         conn.row_factory = sqlite3.Row  # Utiliser sqlite3.Row pour obtenir des résultats sous forme de dictionnaire
         cursor = conn.cursor()
-        cursor.execute('SELECT * FROM clients WHERE nom = ?', (nom,))
+        cursor.execute('SELECT nom, prenom, adresse FROM clients WHERE nom = ?', (nom,))
         data = cursor.fetchone()
         conn.close()
         if not data:
             error_message = "Nom non trouvé dans la base de données."
-        return render_template('read_nom.html', data=data)
-
-    return render_template('recherche.html')
-
+    return render_template('read_nom.html', data=data, error_message=error_message)
                                                                                                                                        
 if __name__ == "__main__":
   app.run(debug=True)
