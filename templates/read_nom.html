@@ -1,8 +1,17 @@
-<div class="result">
+   <div class="container">
+        <h1>Affiche Nom</h1>
+        <form method="POST" action="/fiche_nom/">
+            <label for="nom">Nom :</label>
+            <input type="text" id="nom" name="name" required>
+            <button type="submit">Rechercher</button>
+        </form>
+        <div class="result">
             {% if data %}
                 <h2>Résultats de la recherche :</h2>
                 <ul>
-                        <li>{{ data.nom }}</li> <!-- Assurez-vous que row[1] correspond bien au nom dans votre base de données -->
+                    {% for row in data %}
+                        <li>{{ row[1] }}</li> <!-- Assurez-vous que row[1] correspond bien au nom dans votre base de données -->
+                    {% endfor %}
                 </ul>
             {% else %}
                 <p>Aucun résultat trouvé.</p>
