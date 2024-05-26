@@ -108,7 +108,7 @@ def recherche_nom():
         conn.close()
         if not data:
             error_message = "Nom non trouvé dans la base de données."
-        return render_template('read_nom.html', data=data, error_message=error_message)
+        return render_template('read_nom.html', data=data)
 
     return render_template('recherche.html')
 
