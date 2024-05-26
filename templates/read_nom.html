@@ -5,9 +5,9 @@
         {% elif data %}
            
             <h1>Fiche Client</h1>
-                <p><strong>Nom :</strong> {{ data[0] }}</p>
-                <p><strong>Prénom :</strong> {{ data[1] }}</p>
-                <p><strong>Adresse :</strong> {{ data[2] }}</p>
+                <p><strong>Nom :</strong> {{ data['nom'] }}</p>
+                <p><strong>Prénom :</strong> {{ data['prenom'] }}</p>
+                <p><strong>Adresse :</strong> {{ data['adresse'] }}</p>
           
          {% endif %}
 </body>
