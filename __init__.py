@@ -8,9 +8,13 @@ import sqlite3
 app = Flask(__name__)                                                                                                                  
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'  # Clé secrète pour les sessions
 
-# Fonction pour créer une clé "authentifie" dans la session utilisateur
+# Fonction pour créer une clé "authentifie" dans la session admin
 def est_authentifie():
     return session.get('authentifie')
+
+# Fonction pour créer une clé "authentifie" dans la session utilisateur
+def est_authentifie_user():
+    return session.get('authentifieUser')
 
 @app.route('/')
 def hello_world():
@@ -38,6 +42,21 @@ def authentification():
             return render_template('formulaire_authentification.html', error=True)
 
     return render_template('formulaire_authentification.html', error=False)
+
+
+@app.route('/authentificationUser', methods=['GET', 'POST'])
+def authentificationUser():
+    if request.method == 'POST':
+        # Vérifier les identifiants
+        if request.form['username'] == 'user' and request.form['password'] == '12345': # password à cacher par la suite
+            session['authentifieUser'] = True
+            # Rediriger vers la route lecture après une authentification réussie
+            return redirect(url_for('lecture'))
+        else:
+            # Afficher un message d'erreur si les identifiants sont incorrects
+            return render_template('formulaire_authentificationUser.html', error=True)
+
+    return render_template('formulaire_authentificationUser.html', error=False)
 
 @app.route('/fiche_client/<int:post_id>')
 def Readfiche(post_id):
@@ -79,7 +98,7 @@ def enregistrer_client():
 
 @app.route('/fiche_nom/', methods=['GET', 'POST'])
 def recherche_nom():
-    if request.method == 'POST':
+    if request.method == 'POST' and session['authentifieUser'] = True:
         nom = request.form['nom']
         conn = sqlite3.connect('database.db')
         cursor = conn.cursor()
