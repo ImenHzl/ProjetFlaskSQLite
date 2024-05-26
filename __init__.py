@@ -103,11 +103,11 @@ def recherche_nom():
         conn = sqlite3.connect('database.db')
         cursor = conn.cursor()
         cursor.execute('SELECT * FROM clients WHERE nom = ?', (nom,))
-        data = cursor.fetchall()
+        data = cursor.fetchone()
         conn.close()
         if not data:
             error_message = "Nom non trouvé dans la base de données."
-        return render_template('read_nom.html', data=data)
+        return render_template('read_nom.html', data=data, error_message=error_message)
 
     return render_template('recherche.html')
 
