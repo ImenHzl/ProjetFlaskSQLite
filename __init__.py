@@ -82,13 +82,12 @@ def ReadficheNom():
     data = None
     if request.method == 'POST':
         nom = request.form['name']
-    else
-        conn = sqlite3.connect('database.db')
-        cursor = conn.cursor()
-        cursor.execute('SELECT * FROM clients WHERE nom = ?', (nom,))
-        data = cursor.fetchall()
-        conn.close()
-    return render_template('read_nom.html', data=data)
+    conn = sqlite3.connect('database.db')
+    cursor = conn.cursor()
+    cursor.execute('SELECT * FROM clients WHERE nom = ?', (nom,))
+    data = cursor.fetchall()
+    conn.close()
+return render_template('read_nom.html', data=data)
                                                                                                                                        
 if __name__ == "__main__":
   app.run(debug=True)
