@@ -8,16 +8,16 @@
             <th>Adresse</th>
             <th>Date de création</th>
         </tr>
-        {% if not data %}
+        {% if error_message %}
                 <p class="error">{{ error_message }}</p>
         {% elif data %}
            
             <tr>
-                <td>{{ data['nom'] }}</td>
-                <td>{{ data['nom'] }}</td>
-                <td>{{ data['prenom'] }}</td>
-                <td>{{ data['adresse'] }}</td>
-                <td>{{ data['created'] }}</td>
+                <td>{{ data[0] }}</td>
+                <td>{{ data[1] }}</td>
+                <td>{{ data[2] }}</td>
+                <td>{{ data[3] }}</td>
+                <td>{{ data[4] }}</td>
             </tr>
           
          {% endif %}
