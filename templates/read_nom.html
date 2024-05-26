@@ -1,25 +1,13 @@
 <body>
     <h2>Résultats de la recherche</h2>
-    <table>
-        <tr>
-            <th>ID</th>
-            <th>Nom</th>
-            <th>Prénom</th>
-            <th>Adresse</th>
-            <th>Date de création</th>
-        </tr>
         {% if error_message %}
                 <p class="error">{{ error_message }}</p>
         {% elif data %}
            
-            <tr>
-                <td>{{ data[0] }}</td>
-                <td>{{ data[1] }}</td>
-                <td>{{ data[2] }}</td>
-                <td>{{ data[3] }}</td>
-                <td>{{ data[4] }}</td>
-            </tr>
+            <h1>Fiche Client</h1>
+                <p><strong>Nom :</strong> {{ data['nom'] }}</p>
+                <p><strong>Prénom :</strong> {{ data['prenom'] }}</p>
+                <p><strong>Adresse :</strong> {{ data['adresse'] }}</p>
           
          {% endif %}
-    </table>
 </body>
