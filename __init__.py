@@ -101,6 +101,7 @@ def recherche_nom():
     if request.method == 'POST' and est_authentifie_user():
         nom = request.form['nom']
         conn = sqlite3.connect('database.db')
+        conn.row_factory = sqlite3.Row  # Utiliser sqlite3.Row pour obtenir des résultats sous forme de dictionnaire
         cursor = conn.cursor()
         cursor.execute('SELECT * FROM clients WHERE nom = ?', (nom,))
         data = cursor.fetchone()
