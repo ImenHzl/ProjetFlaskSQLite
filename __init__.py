@@ -98,7 +98,7 @@ def enregistrer_client():
 
 @app.route('/fiche_nom/', methods=['GET', 'POST'])
 def recherche_nom():
-    if request.method == 'POST' and session['authentifieUser'] = True:
+    if request.method == 'POST' and est_authentifie_user():
         nom = request.form['nom']
         conn = sqlite3.connect('database.db')
         cursor = conn.cursor()
