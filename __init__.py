@@ -105,6 +105,8 @@ def recherche_nom():
         cursor.execute('SELECT * FROM clients WHERE nom = ?', (nom,))
         data = cursor.fetchall()
         conn.close()
+        if not data:
+            error_message = "Nom non trouvé dans la base de données."
         return render_template('read_nom.html', data=data)
 
     return render_template('recherche.html')
